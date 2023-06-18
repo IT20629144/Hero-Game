@@ -110,7 +110,7 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
-
+        // clearInterval(moveBackgroundX);
         console.log("jump");
       }
       break;
@@ -121,7 +121,7 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
-
+        clearInterval(moveBackgroundX)
         console.log("attack");
       }
       break;
