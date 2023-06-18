@@ -10,18 +10,9 @@ let jumpIntevalId;
 let attackIntevalId;
 let run = false;
 var backgroundImagePosition = 0;
+let moveBackgroundX;
 
 window.addEventListener("keydown", changeAction);
-// IdleAnimationStart();
-// runAnimationStart();
-// jumpAnimationStart();
-// attackAnimationStart();
-
-// gameStart();
-
-// function gameStart(){
-//     setInterval(moveBackground,100);
-// }
 
 function IdleAnimation() {
   idleImageNumber += 1;
@@ -95,6 +86,8 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(jumpIntevalId);
         clearInterval(attackIntevalId);
+        clearInterval(moveBackgroundX);
+        moveBackground();
         console.log("run");
       }
 
@@ -106,7 +99,7 @@ function changeAction(event) {
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
         clearInterval(attackIntevalId);
-
+        clearInterval(moveBackgroundX);
         console.log("idle");
       }
       break;
@@ -135,7 +128,15 @@ function changeAction(event) {
   }
 }
 
-function moveBackground(){
+function changeBackground(){
     backgroundImagePosition -= 20;
     background.style.backgroundPositionX = backgroundImagePosition + "px";
 }
+
+function moveBackground(){
+    moveBackgroundX = setInterval(changeBackground,100);
+};
+
+function pauseBackground(){
+    clearInterval(moveBackgroundX);
+};
