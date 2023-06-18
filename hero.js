@@ -16,7 +16,7 @@ let moveBackgroundX;
 
 window.addEventListener("keydown", changeAction);
 
-jumpAttackAnimationStart();
+// jumpAttackAnimationStart();
 
 function IdleAnimation() {
   idleImageNumber += 1;
@@ -130,6 +130,7 @@ function changeAction(event) {
   const jumpPosition = 38;
   const attackPosition = 40;
   const attackStop = 71;
+  const jumpAttackPosition = 86;
 
   switch (keyPressed) {
     case forwardRun:
@@ -190,6 +191,16 @@ function changeAction(event) {
         clearInterval(moveBackgroundX);
         stopAttack();
         IdleAnimationStart();
+      }
+      break;
+      case jumpAttackPosition:
+      {
+        clearInterval(jumpAttackIntevalId);
+        clearInterval(idleIntevalId);
+        clearInterval(runIntevalId);
+        clearInterval(jumpIntevalId);
+        jumpAttackAnimationStart();
+        console.log("attackjump");
       }
       break;
   }
