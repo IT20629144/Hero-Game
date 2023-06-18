@@ -1,4 +1,5 @@
 var hero = document.getElementById("hero");
+var background = document.getElementById("background");
 let idleImageNumber = 0;
 let runImageNumber = 0;
 let attackImageNumber = 0;
@@ -8,12 +9,19 @@ let runIntevalId;
 let jumpIntevalId;
 let attackIntevalId;
 let run = false;
+var backgroundImagePosition = 0;
 
 window.addEventListener("keydown", changeAction);
 // IdleAnimationStart();
 // runAnimationStart();
 // jumpAnimationStart();
 // attackAnimationStart();
+
+// gameStart();
+
+// function gameStart(){
+//     setInterval(moveBackground,100);
+// }
 
 function IdleAnimation() {
   idleImageNumber += 1;
@@ -125,4 +133,9 @@ function changeAction(event) {
       }
       break;
   }
+}
+
+function moveBackground(){
+    backgroundImagePosition -= 20;
+    background.style.backgroundPositionX = backgroundImagePosition + "px";
 }
