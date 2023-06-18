@@ -4,15 +4,19 @@ let idleImageNumber = 0;
 let runImageNumber = 0;
 let attackImageNumber = 0;
 let jumpImageNumber = 0;
+let jumpAttackImageNumber = 0;
 let idleIntevalId;
 let runIntevalId;
 let jumpIntevalId;
 let attackIntevalId;
+let jumpAttackIntevalId;
 let run = false;
 var backgroundImagePosition = 0;
 let moveBackgroundX;
 
 window.addEventListener("keydown", changeAction);
+
+jumpAttackAnimationStart();
 
 function IdleAnimation() {
   idleImageNumber += 1;
@@ -67,6 +71,30 @@ function attackAnimation() {
   hero.src = "images/Attack (" + attackImageNumber + ").png";
 }
 
+function jumpAttackAnimation() {
+    jumpAttackImageNumber += 1;
+
+    if (jumpAttackImageNumber >= 11) {
+        clearInterval(jumpAttackIntevalId);
+        runAnimationStart();
+        jumpAttackImageNumber = 1;
+      }
+    
+      if (jumpAttackImageNumber < 6) {
+        jumpPositionY += 30;
+        hero.style.bottom = jumpPositionY + "px";
+      }
+      if (jumpAttackImageNumber >= 6) {
+        jumpPositionY -= 30;
+        hero.style.bottom = jumpPositionY + "px";
+      }
+  
+    if (jumpAttackImageNumber >= 11) {
+        jumpAttackImageNumber = 1;
+    }
+    hero.src = "images/JumpAttack (" + jumpAttackImageNumber + ").png";
+  }
+
 function runAnimationStart() {
   runIntevalId = setInterval(runAnimation, 100);
 }
@@ -82,6 +110,10 @@ function jumpAnimationStart() {
 function attackAnimationStart() {
   attackIntevalId = setInterval(attackAnimation, 100);
 }
+
+function jumpAttackAnimationStart() {
+    jumpAttackIntevalId = setInterval(jumpAttackAnimation, 75);
+  }
 
 function stopAttack() {
   let stopAttackHero = clearInterval(attackIntevalId);
@@ -150,6 +182,8 @@ function changeAction(event) {
       break;
     case attackStop:
       {
+        // clearInterval(jumpIntevalId);
+        // let jumpattackPosition;
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(idleIntevalId);
