@@ -39,24 +39,26 @@ function runAnimation() {
   }
 }
 
-let jumpPositionY = 42;
+let jumpPositionY = 500;
+let jumpY;
 
 function jumpAnimation() {
   jumpImageNumber += 1;
 
   if (jumpImageNumber >= 11) {
+    jumpImageNumber = 1;
+
     clearInterval(jumpIntevalId);
     runAnimationStart();
-    jumpImageNumber = 1;
   }
 
   if (jumpImageNumber < 6) {
-    jumpPositionY += 30;
-    hero.style.bottom = jumpPositionY + "px";
+    jumpPositionY -= 30;
+    jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
   if (jumpImageNumber >= 6) {
-    jumpPositionY -= 30;
-    hero.style.bottom = jumpPositionY + "px";
+    jumpPositionY += 30;
+    jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
 
   hero.src = "images/Jump (" + jumpImageNumber + ").png";
@@ -72,28 +74,37 @@ function attackAnimation() {
 }
 
 function jumpAttackAnimation() {
-    jumpAttackImageNumber += 1;
+  jumpAttackImageNumber += 1;
 
-    if (jumpAttackImageNumber >= 11) {
-        clearInterval(jumpAttackIntevalId);
-        runAnimationStart();
-        jumpAttackImageNumber = 1;
-      }
-    
-      if (jumpAttackImageNumber < 6) {
-        jumpPositionY += 30;
-        hero.style.bottom = jumpPositionY + "px";
-      }
-      if (jumpAttackImageNumber >= 6) {
-        jumpPositionY -= 30;
-        hero.style.bottom = jumpPositionY + "px";
-      }
-  
-    if (jumpAttackImageNumber >= 11) {
-        jumpAttackImageNumber = 1;
-    }
-    hero.src = "images/JumpAttack (" + jumpAttackImageNumber + ").png";
+  if (jumpAttackImageNumber >= 11) {
+    clearInterval(jumpAttackIntevalId);
+    runAnimationStart();
+    jumpAttackImageNumber = 1;
   }
+
+  if (jumpAttackImageNumber < 6) {
+    jumpPositionY -= 30;
+    jumpY = hero.style.marginTop = jumpPositionY + "px";
+  }
+  if (jumpAttackImageNumber >= 6) {
+    jumpPositionY += 30;
+    jumpY = hero.style.marginTop = jumpPositionY + "px";
+  }
+  hero.src = "images/JumpAttack (" + jumpAttackImageNumber + ").png";
+}
+function heroDefaultPosition(){
+
+    jumpPositionY = 500;
+    
+    hero.style.marginTop = jumpPositionY + "px";
+};
+
+// function checkHeroPosition(){
+//     setInterval(() => {
+//         heroDefaultPosition();
+//         console.log('hello');
+//     }, 1000);
+// };
 
 function runAnimationStart() {
   runIntevalId = setInterval(runAnimation, 100);
@@ -112,8 +123,8 @@ function attackAnimationStart() {
 }
 
 function jumpAttackAnimationStart() {
-    jumpAttackIntevalId = setInterval(jumpAttackAnimation, 75);
-  }
+  jumpAttackIntevalId = setInterval(jumpAttackAnimation, 75);
+}
 
 function stopAttack() {
   let stopAttackHero = clearInterval(attackIntevalId);
@@ -164,9 +175,12 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
+        clearInterval(jumpAttackIntevalId);
         clearInterval(moveBackgroundX);
         moveBackground();
         console.log("jump");
+        heroDefaultPosition();
+        console.log(jumpY);
       }
       break;
     case attackPosition:
@@ -183,8 +197,6 @@ function changeAction(event) {
       break;
     case attackStop:
       {
-        // clearInterval(jumpIntevalId);
-        // let jumpattackPosition;
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(idleIntevalId);
@@ -193,14 +205,17 @@ function changeAction(event) {
         IdleAnimationStart();
       }
       break;
-      case jumpAttackPosition:
+    case jumpAttackPosition:
       {
         clearInterval(jumpAttackIntevalId);
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
         jumpAttackAnimationStart();
+        heroDefaultPosition();
         console.log("attackjump");
+        console.log(jumpY);
+        
       }
       break;
   }
