@@ -35,12 +35,26 @@ function runAnimation() {
   }
 }
 
+let jumpPositionY = 42;
+
 function jumpAnimation() {
   jumpImageNumber += 1;
 
   if (jumpImageNumber >= 11) {
+    clearInterval(jumpIntevalId);
+    runAnimationStart();
     jumpImageNumber = 1;
   }
+
+  if(jumpImageNumber < 6){
+    jumpPositionY += 30;
+    hero.style.bottom = jumpPositionY + "px"; 
+  }
+  if(jumpImageNumber >= 6){
+    jumpPositionY -= 30;
+    hero.style.bottom = jumpPositionY + "px"; 
+  }
+
   hero.src = "images/Jump (" + jumpImageNumber + ").png";
 }
 
@@ -110,7 +124,8 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
-        // clearInterval(moveBackgroundX);
+        clearInterval(moveBackgroundX);
+        moveBackground();
         console.log("jump");
       }
       break;
