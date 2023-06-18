@@ -29,7 +29,7 @@ function runAnimation() {
 
   if (runImageNumber >= 11) {
     runImageNumber = 1;
-  }    
+  }
   if (run) {
     hero.src = "images/Run (" + runImageNumber + ").png";
   }
@@ -46,13 +46,13 @@ function jumpAnimation() {
     jumpImageNumber = 1;
   }
 
-  if(jumpImageNumber < 6){
+  if (jumpImageNumber < 6) {
     jumpPositionY += 30;
-    hero.style.bottom = jumpPositionY + "px"; 
+    hero.style.bottom = jumpPositionY + "px";
   }
-  if(jumpImageNumber >= 6){
+  if (jumpImageNumber >= 6) {
     jumpPositionY -= 30;
-    hero.style.bottom = jumpPositionY + "px"; 
+    hero.style.bottom = jumpPositionY + "px";
   }
 
   hero.src = "images/Jump (" + jumpImageNumber + ").png";
@@ -83,6 +83,12 @@ function attackAnimationStart() {
   attackIntevalId = setInterval(attackAnimation, 100);
 }
 
+function stopAttack() {
+  let stopAttackHero = clearInterval(attackIntevalId);
+
+  return stopAttackHero;
+}
+
 function changeAction(event) {
   let keyPressed = event.keyCode;
 
@@ -91,6 +97,7 @@ function changeAction(event) {
   const idlePosition = 37;
   const jumpPosition = 38;
   const attackPosition = 40;
+  const attackStop = 71;
 
   switch (keyPressed) {
     case forwardRun:
@@ -133,25 +140,36 @@ function changeAction(event) {
       {
         clearInterval(attackIntevalId);
         attackAnimationStart();
+        attackAnimation();
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
-        clearInterval(moveBackgroundX)
+        clearInterval(moveBackgroundX);
         console.log("attack");
+      }
+      break;
+    case attackStop:
+      {
+        clearInterval(runIntevalId);
+        clearInterval(attackIntevalId);
+        clearInterval(idleIntevalId);
+        clearInterval(moveBackgroundX);
+        stopAttack();
+        IdleAnimationStart();
       }
       break;
   }
 }
 
-function changeBackground(){
-    backgroundImagePosition -= 20;
-    background.style.backgroundPositionX = backgroundImagePosition + "px";
+function changeBackground() {
+  backgroundImagePosition -= 20;
+  background.style.backgroundPositionX = backgroundImagePosition + "px";
 }
 
-function moveBackground(){
-    moveBackgroundX = setInterval(changeBackground,100);
-};
+function moveBackground() {
+  moveBackgroundX = setInterval(changeBackground, 100);
+}
 
-function pauseBackground(){
-    clearInterval(moveBackgroundX);
-};
+function pauseBackground() {
+  clearInterval(moveBackgroundX);
+}
