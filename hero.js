@@ -76,6 +76,8 @@ function attackAnimation() {
 
   if (attackImageNumber >= 11) {
     attackImageNumber = 1;
+    clearInterval(attackIntevalId);
+    IdleAnimationStart();
   }
   hero.src = "images/Attack (" + attackImageNumber + ").png";
 }
@@ -224,6 +226,8 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
+        clearInterval(moveBackgroundX);
+        moveBackground();
         jumpAttackAnimationStart();
         // heroDefaultPosition();
         console.log("attackjump");
@@ -240,7 +244,7 @@ function changeBackground() {
 }
 
 function moveBackground() {
-  moveBackgroundX = setInterval(changeBackground, 100);
+  moveBackgroundX = setInterval(changeBackground, 50);
 }
 
 function pauseBackground() {
