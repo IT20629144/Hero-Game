@@ -15,14 +15,14 @@ let walkIntevalId;
 let run = false;
 var backgroundImagePosition = 0;
 let moveBackgroundX;
+let moveWalkBackgroundX;
 
 window.addEventListener("keydown", changeAction);
 
-// gameStart();
-walkAnimationStart();
+gameStart();
 function gameStart(){
-  // IdleAnimationStart();
-  walkAnimationStart();
+  IdleAnimationStart();
+  // walkAnimationStart();
 };
 function IdleAnimation() {
   idleImageNumber += 1;
@@ -189,6 +189,7 @@ function changeAction(event) {
         clearInterval(jumpIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(walkIntevalId);
+        clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
         moveBackground();
         console.log("run");
@@ -203,6 +204,7 @@ function changeAction(event) {
         clearInterval(jumpIntevalId);
         clearInterval(walkIntevalId);
         clearInterval(attackIntevalId);
+        clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
         console.log("idle");
       }
@@ -216,6 +218,7 @@ function changeAction(event) {
         clearInterval(attackIntevalId);
         clearInterval(jumpAttackIntevalId);
         clearInterval(walkIntevalId);
+        clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
         moveBackground();
         console.log("jump");
@@ -232,6 +235,7 @@ function changeAction(event) {
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
         clearInterval(walkIntevalId);
+        clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
         console.log("attack");
       }
@@ -242,6 +246,7 @@ function changeAction(event) {
         clearInterval(attackIntevalId);
         clearInterval(idleIntevalId);
         clearInterval(walkIntevalId);
+        clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
         stopAttack();
         IdleAnimationStart();
@@ -254,6 +259,7 @@ function changeAction(event) {
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
         clearInterval(walkIntevalId);
+        clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
         moveBackground();
         jumpAttackAnimationStart();
@@ -270,6 +276,7 @@ function changeAction(event) {
           clearInterval(runIntevalId);
           clearInterval(jumpIntevalId);
           clearInterval(moveBackgroundX);
+          clearInterval(moveWalkBackgroundX);
           moveWalkBackground();
           clearInterval(walkIntevalId);
           walkAnimationStart();
@@ -300,5 +307,5 @@ function changeWalkBackground(){
 };
 
 function moveWalkBackground(){
-   moveWalkBackground = setInterval(changeWalkBackground,50);
+   moveWalkBackgroundX = setInterval(changeWalkBackground,50);
 };
