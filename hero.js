@@ -48,16 +48,27 @@ function jumpAnimation() {
   if (jumpImageNumber >= 11) {
     jumpImageNumber = 1;
 
+    if(jumpImageNumber == 1){
+      jumpPositionY = 500;
+    jumpY = hero.style.marginTop = jumpPositionY + "px";
+
     clearInterval(jumpIntevalId);
     runAnimationStart();
+    }
+
+    
   }
 
-  if (jumpImageNumber < 6) {
-    jumpPositionY -= 30;
+  if (jumpImageNumber < 6 && jumpImageNumber >= 2) {
+    // jumpPositionY -= 30;
+    // jumpPositionY -= 30;
+     jumpPositionY = jumpPositionY - 30;
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
-  if (jumpImageNumber >= 6) {
-    jumpPositionY += 30;
+  if (jumpImageNumber > 6) {
+    // jumpPositionY += 30;
+    jumpPositionY = jumpPositionY + 30;
+
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
 
@@ -82,28 +93,28 @@ function jumpAttackAnimation() {
     jumpAttackImageNumber = 1;
   }
 
-  if (jumpAttackImageNumber < 6) {
+  if (jumpAttackImageNumber <= 6) {
     jumpPositionY -= 30;
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
-  if (jumpAttackImageNumber >= 6) {
+  if (jumpAttackImageNumber > 6) {
     jumpPositionY += 30;
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
   hero.src = "images/JumpAttack (" + jumpAttackImageNumber + ").png";
 }
-function heroDefaultPosition(){
+// function heroDefaultPosition(){
 
-    jumpPositionY = 500;
+//     jumpPositionY = 500;
     
-    hero.style.marginTop = jumpPositionY + "px";
-};
+//     hero.style.marginTop = jumpPositionY + "px";
+// };
 
 // function checkHeroPosition(){
 //     setInterval(() => {
 //         heroDefaultPosition();
 //         console.log('hello');
-//     }, 1000);
+//     }, 2000);
 // };
 
 function runAnimationStart() {
@@ -179,7 +190,7 @@ function changeAction(event) {
         clearInterval(moveBackgroundX);
         moveBackground();
         console.log("jump");
-        heroDefaultPosition();
+        // checkHeroPosition();
         console.log(jumpY);
       }
       break;
@@ -212,7 +223,7 @@ function changeAction(event) {
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
         jumpAttackAnimationStart();
-        heroDefaultPosition();
+        // heroDefaultPosition();
         console.log("attackjump");
         console.log(jumpY);
         
