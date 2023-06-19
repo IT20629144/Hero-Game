@@ -19,11 +19,12 @@ let moveWalkBackgroundX;
 
 window.addEventListener("keydown", changeAction);
 
+// checkbackground();
 gameStart();
-function gameStart(){
+function gameStart() {
   IdleAnimationStart();
   // walkAnimationStart();
-};
+}
 function IdleAnimation() {
   idleImageNumber += 1;
 
@@ -54,19 +55,17 @@ function jumpAnimation() {
   if (jumpImageNumber >= 11) {
     jumpImageNumber = 1;
 
-    if(jumpImageNumber == 1){
+    if (jumpImageNumber == 1) {
       jumpPositionY = 500;
-    jumpY = hero.style.marginTop = jumpPositionY + "px";
+      jumpY = hero.style.marginTop = jumpPositionY + "px";
 
-    clearInterval(jumpIntevalId);
-    runAnimationStart();
+      clearInterval(jumpIntevalId);
+      checkWalkOrRun();
     }
-
-    
   }
 
   if (jumpImageNumber <= 6 && jumpImageNumber >= 2) {
-     jumpPositionY = jumpPositionY - 30;
+    jumpPositionY = jumpPositionY - 30;
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
   if (jumpImageNumber > 6) {
@@ -93,14 +92,14 @@ function jumpAttackAnimation() {
   jumpAttackImageNumber += 1;
 
   if (jumpAttackImageNumber >= 11) {
-    
     jumpAttackImageNumber = 1;
 
-    if( jumpAttackImageNumber == 1){
+    if (jumpAttackImageNumber == 1) {
       jumpPositionY = 500;
       hero.style.marginTop = jumpPositionY + "px";
       clearInterval(jumpAttackIntevalId);
-      runAnimationStart();
+      checkWalkOrRun();
+      console.log(Walk);
     }
   }
 
@@ -126,7 +125,7 @@ function walkAnimation() {
 // function heroDefaultPosition(){
 
 //     jumpPositionY = 500;
-    
+
 //     hero.style.marginTop = jumpPositionY + "px";
 // };
 
@@ -161,7 +160,6 @@ function walkAnimationStart() {
   walkIntevalId = setInterval(walkAnimation, 105);
 }
 
-
 function stopAttack() {
   let stopAttackHero = clearInterval(attackIntevalId);
 
@@ -183,15 +181,19 @@ function changeAction(event) {
   switch (keyPressed) {
     case forwardRun:
       {
+        backMove = true;
+        Walk = false;
         clearInterval(runIntevalId);
-        runAnimationStart();
+        // runAnimationStart();
         clearInterval(idleIntevalId);
         clearInterval(jumpIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(walkIntevalId);
         clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
-        moveBackground();
+        // moveBackground();
+        checkbackground();
+        checkWalkOrRun();
         console.log("run");
       }
 
@@ -220,7 +222,8 @@ function changeAction(event) {
         clearInterval(walkIntevalId);
         clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
-        moveBackground();
+        // moveBackground();
+        checkbackground();
         console.log("jump");
         // checkHeroPosition();
         console.log(jumpY);
@@ -261,30 +264,34 @@ function changeAction(event) {
         clearInterval(walkIntevalId);
         clearInterval(moveWalkBackgroundX);
         clearInterval(moveBackgroundX);
-        moveBackground();
+        // moveBackground();
         jumpAttackAnimationStart();
+        checkbackground();
         // heroDefaultPosition();
         console.log("attackjump");
         console.log(jumpY);
-        
       }
       break;
-      case walkPosition:
-        {
-          clearInterval(jumpAttackIntevalId);
-          clearInterval(idleIntevalId);
-          clearInterval(runIntevalId);
-          clearInterval(jumpIntevalId);
-          clearInterval(moveBackgroundX);
-          clearInterval(moveWalkBackgroundX);
-          moveWalkBackground();
-          clearInterval(walkIntevalId);
-          walkAnimationStart();
-          console.log("walk");
-          console.log(jumpY);
-          
-        }
-        break;
+    case walkPosition:
+      {
+        backMove = false;
+        Walk = true;
+        clearInterval(jumpAttackIntevalId);
+        clearInterval(idleIntevalId);
+        clearInterval(runIntevalId);
+        clearInterval(jumpIntevalId);
+        clearInterval(moveBackgroundX);
+        clearInterval(moveWalkBackgroundX);
+        // moveWalkBackground();
+        clearInterval(walkIntevalId);
+        // walkAnimationStart();
+        checkWalkOrRun();
+        checkbackground();
+        console.log("walk");
+        console.log(jumpY);
+
+      }
+      break;
   }
 }
 
@@ -292,20 +299,49 @@ function changeBackground() {
   backgroundImagePosition -= 20;
   background.style.backgroundPositionX = backgroundImagePosition + "px";
 }
+let backMove = false;
 
 function moveBackground() {
   moveBackgroundX = setInterval(changeBackground, 50);
+  console.log("moveBackground");
+
+   backMove = true;
+
+  return backMove;
 }
 
 function pauseBackground() {
   clearInterval(moveBackgroundX);
 }
 
-function changeWalkBackground(){
+function changeWalkBackground() {
   backgroundImagePosition -= 10;
   background.style.backgroundPositionX = backgroundImagePosition + "px";
-};
+}
 
-function moveWalkBackground(){
-   moveWalkBackgroundX = setInterval(changeWalkBackground,50);
-};
+function moveWalkBackground() {
+  moveWalkBackgroundX = setInterval(changeWalkBackground, 50);
+  console.log("movewalkBackground");
+  
+}
+
+function checkbackground() {
+  if(backMove){
+    moveBackground();
+  }
+  else{
+    moveWalkBackground();
+  }
+}
+
+let Walk = true;
+function checkWalkOrRun(){
+  if(Walk){
+      walkAnimationStart();
+  }
+  else{
+    runAnimationStart();
+  }
+}
+
+let idle = true;
