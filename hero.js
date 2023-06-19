@@ -16,7 +16,6 @@ let moveBackgroundX;
 
 window.addEventListener("keydown", changeAction);
 
-// jumpAttackAnimationStart();
 
 function IdleAnimation() {
   idleImageNumber += 1;
@@ -59,14 +58,11 @@ function jumpAnimation() {
     
   }
 
-  if (jumpImageNumber < 6 && jumpImageNumber >= 2) {
-    // jumpPositionY -= 30;
-    // jumpPositionY -= 30;
+  if (jumpImageNumber <= 6 && jumpImageNumber >= 2) {
      jumpPositionY = jumpPositionY - 30;
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
   if (jumpImageNumber > 6) {
-    // jumpPositionY += 30;
     jumpPositionY = jumpPositionY + 30;
 
     jumpY = hero.style.marginTop = jumpPositionY + "px";
@@ -88,12 +84,18 @@ function jumpAttackAnimation() {
   jumpAttackImageNumber += 1;
 
   if (jumpAttackImageNumber >= 11) {
-    clearInterval(jumpAttackIntevalId);
-    runAnimationStart();
+    
     jumpAttackImageNumber = 1;
+
+    if( jumpAttackImageNumber == 1){
+      jumpPositionY = 500;
+      hero.style.marginTop = jumpPositionY + "px";
+      clearInterval(jumpAttackIntevalId);
+      runAnimationStart();
+    }
   }
 
-  if (jumpAttackImageNumber <= 6) {
+  if (jumpAttackImageNumber <= 6 && jumpAttackImageNumber >= 2) {
     jumpPositionY -= 30;
     jumpY = hero.style.marginTop = jumpPositionY + "px";
   }
