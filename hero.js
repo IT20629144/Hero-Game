@@ -270,7 +270,7 @@ function changeAction(event) {
           clearInterval(runIntevalId);
           clearInterval(jumpIntevalId);
           clearInterval(moveBackgroundX);
-          moveBackground();
+          moveWalkBackground();
           clearInterval(walkIntevalId);
           walkAnimationStart();
           console.log("walk");
@@ -293,3 +293,12 @@ function moveBackground() {
 function pauseBackground() {
   clearInterval(moveBackgroundX);
 }
+
+function changeWalkBackground(){
+  backgroundImagePosition -= 10;
+  background.style.backgroundPositionX = backgroundImagePosition + "px";
+};
+
+function moveWalkBackground(){
+   moveWalkBackground = setInterval(changeWalkBackground,50);
+};
