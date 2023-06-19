@@ -5,18 +5,25 @@ let runImageNumber = 0;
 let attackImageNumber = 0;
 let jumpImageNumber = 0;
 let jumpAttackImageNumber = 0;
+let walkImageNumber = 0;
 let idleIntevalId;
 let runIntevalId;
 let jumpIntevalId;
 let attackIntevalId;
 let jumpAttackIntevalId;
+let walkIntevalId;
 let run = false;
 var backgroundImagePosition = 0;
 let moveBackgroundX;
 
 window.addEventListener("keydown", changeAction);
 
-
+// gameStart();
+walkAnimationStart();
+function gameStart(){
+  // IdleAnimationStart();
+  walkAnimationStart();
+};
 function IdleAnimation() {
   idleImageNumber += 1;
 
@@ -107,6 +114,15 @@ function jumpAttackAnimation() {
   }
   hero.src = "images/JumpAttack (" + jumpAttackImageNumber + ").png";
 }
+
+function walkAnimation() {
+  walkImageNumber += 1;
+
+  if (walkImageNumber >= 11) {
+    walkImageNumber = 1;
+  }
+  hero.src = "images/Walk (" + walkImageNumber + ").png";
+}
 // function heroDefaultPosition(){
 
 //     jumpPositionY = 500;
@@ -140,6 +156,11 @@ function attackAnimationStart() {
 function jumpAttackAnimationStart() {
   jumpAttackIntevalId = setInterval(jumpAttackAnimation, 75);
 }
+
+function walkAnimationStart() {
+  walkIntevalId = setInterval(walkAnimation, 105);
+}
+
 
 function stopAttack() {
   let stopAttackHero = clearInterval(attackIntevalId);
