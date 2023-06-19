@@ -1,4 +1,6 @@
 var hero = document.getElementById("hero");
+let enemyId = document.querySelector("#enemy");
+// var enemy = document.createElement("div");
 var background = document.getElementById("background");
 let idleImageNumber = 0;
 let runImageNumber = 0;
@@ -16,15 +18,23 @@ let run = false;
 var backgroundImagePosition = 0;
 let moveBackgroundX;
 let moveWalkBackgroundX;
+let enemyMarginLeft = 500;
+let enemyOne = [
+  {x:700,y:700},
+  {x:500,y:500},
+  {x:300 , y:300}
+]
 
 window.addEventListener("keydown", changeAction);
 
-// checkbackground();
 gameStart();
 function gameStart() {
   IdleAnimationStart();
-  // walkAnimationStart();
+  createEnemy();
 }
+
+/* -----------------------   Actions ------------- ------- */
+
 function IdleAnimation() {
   idleImageNumber += 1;
 
@@ -289,7 +299,6 @@ function changeAction(event) {
         checkbackground();
         console.log("walk");
         console.log(jumpY);
-
       }
       break;
   }
@@ -305,7 +314,7 @@ function moveBackground() {
   moveBackgroundX = setInterval(changeBackground, 50);
   console.log("moveBackground");
 
-   backMove = true;
+  backMove = true;
 
   return backMove;
 }
@@ -322,26 +331,47 @@ function changeWalkBackground() {
 function moveWalkBackground() {
   moveWalkBackgroundX = setInterval(changeWalkBackground, 50);
   console.log("movewalkBackground");
-  
 }
 
 function checkbackground() {
-  if(backMove){
+  if (backMove) {
     moveBackground();
-  }
-  else{
+  } else {
     moveWalkBackground();
   }
 }
 
 let Walk = true;
-function checkWalkOrRun(){
-  if(Walk){
-      walkAnimationStart();
-  }
-  else{
+function checkWalkOrRun() {
+  if (Walk) {
+    walkAnimationStart();
+  } else {
     runAnimationStart();
   }
 }
 
-let idle = true;
+/*-----------------  Enemies ------------------*/
+
+function createEnemy() { 
+
+  for (var i = 1; i <= 10; i++) {  
+
+    enemy = document.createElement("div");
+    enemy.className = "enemy";
+    document.getElementById("background").appendChild(enemy);
+    enemy.style.marginLeft = enemyMarginLeft + "px";
+
+
+    if( i < 5){
+    enemyMarginLeft += 500;
+        
+    } else if( i <= 8){
+    enemyMarginLeft += 300;
+
+    }
+    else{
+      enemyMarginLeft += 250;
+    }
+  }
+}
+

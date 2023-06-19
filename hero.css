@@ -22,3 +22,13 @@
     margin-top: 500px;
     margin-left:90px;
 }
+.enemy{
+  width:90px;
+  height:100px;
+  position:absolute;
+  margin-top: 670px;
+  background-image: url(images/skeleton-animation_00.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+}
