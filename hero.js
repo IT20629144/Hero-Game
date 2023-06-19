@@ -178,6 +178,7 @@ function changeAction(event) {
   const attackPosition = 40;
   const attackStop = 71;
   const jumpAttackPosition = 86;
+  const walkPosition = 13;
 
   switch (keyPressed) {
     case forwardRun:
@@ -187,6 +188,7 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(jumpIntevalId);
         clearInterval(attackIntevalId);
+        clearInterval(walkIntevalId);
         clearInterval(moveBackgroundX);
         moveBackground();
         console.log("run");
@@ -199,6 +201,7 @@ function changeAction(event) {
         IdleAnimationStart();
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
+        clearInterval(walkIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(moveBackgroundX);
         console.log("idle");
@@ -212,6 +215,7 @@ function changeAction(event) {
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(jumpAttackIntevalId);
+        clearInterval(walkIntevalId);
         clearInterval(moveBackgroundX);
         moveBackground();
         console.log("jump");
@@ -227,6 +231,7 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
+        clearInterval(walkIntevalId);
         clearInterval(moveBackgroundX);
         console.log("attack");
       }
@@ -236,6 +241,7 @@ function changeAction(event) {
         clearInterval(runIntevalId);
         clearInterval(attackIntevalId);
         clearInterval(idleIntevalId);
+        clearInterval(walkIntevalId);
         clearInterval(moveBackgroundX);
         stopAttack();
         IdleAnimationStart();
@@ -247,6 +253,7 @@ function changeAction(event) {
         clearInterval(idleIntevalId);
         clearInterval(runIntevalId);
         clearInterval(jumpIntevalId);
+        clearInterval(walkIntevalId);
         clearInterval(moveBackgroundX);
         moveBackground();
         jumpAttackAnimationStart();
@@ -256,6 +263,21 @@ function changeAction(event) {
         
       }
       break;
+      case walkPosition:
+        {
+          clearInterval(jumpAttackIntevalId);
+          clearInterval(idleIntevalId);
+          clearInterval(runIntevalId);
+          clearInterval(jumpIntevalId);
+          clearInterval(moveBackgroundX);
+          moveBackground();
+          clearInterval(walkIntevalId);
+          walkAnimationStart();
+          console.log("walk");
+          console.log(jumpY);
+          
+        }
+        break;
   }
 }
 
