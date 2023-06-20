@@ -31,6 +31,7 @@ let boyMarginTop = 500;
 let gameRunning = true;
 let newMarginLeft = 0;
 let score = 0;
+const backgroundMusic = new Audio("music/game.mp3");
 
 window.addEventListener("keydown", changeAction);
 playAgainBtn.addEventListener("click", restartGame);
@@ -46,6 +47,7 @@ function gameStart() {
     createEnemy();
     enemyMove();
     HeroScore();
+    backgroundMusicCheck();
   }
 }
 
@@ -431,8 +433,11 @@ function gameOverAnimations() {
   clearInterval(moveBackgroundX);
   clearInterval(ScoreIntervalId); 
 
-  deadAnimationStart();
   gameRunning = false;
+  backgroundMusicCheck();
+  DeadSound();
+  deadAnimationStart();
+  
 }
 
 function deadAnimationStart() {
@@ -509,3 +514,22 @@ function gameWin(){
     
   }
 }
+
+// Music & sounds
+
+function backgroundMusicCheck(){
+
+  if(gameRunning){
+    backgroundMusic.play();
+
+  }
+  else{
+    backgroundMusic.pause();
+  }
+};
+
+function DeadSound(){
+  let gameOverMusic = new Audio("music/gameOver.mp3");
+  gameOverMusic.play();
+};
+
