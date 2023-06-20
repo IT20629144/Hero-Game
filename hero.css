@@ -12,6 +12,9 @@
   background-image: url(images/background2.jpg);
   background-position: center;
   background-repeat: repeat-x;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  position: absolute;
 }
 .hero{
     position: absolute;
@@ -26,9 +29,8 @@
   width:90px;
   height:100px;
   position:absolute;
-  margin-top: 670px;
+  margin-top: 645px;
   background-image: url(images/skeleton-animation_00.png);
   background-size: contain;
   background-repeat: no-repeat;
-  
 }

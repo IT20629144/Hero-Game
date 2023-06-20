@@ -1,6 +1,6 @@
 var hero = document.getElementById("hero");
-let enemyId = document.querySelector("#enemy");
-// var enemy = document.createElement("div");
+// let enemyId = document.querySelector("#enemy");
+// var enemyOnce = document.getElementById("enemy");
 var background = document.getElementById("background");
 let idleImageNumber = 0;
 let runImageNumber = 0;
@@ -14,23 +14,26 @@ let jumpIntevalId;
 let attackIntevalId;
 let jumpAttackIntevalId;
 let walkIntevalId;
+let moveEnemyIntervalId = 0;
 let run = false;
 var backgroundImagePosition = 0;
 let moveBackgroundX;
 let moveWalkBackgroundX;
-let enemyMarginLeft = 500;
+let enemyMarginLeft = 1500;
 let enemyOne = [
-  {x:700,y:700},
-  {x:500,y:500},
-  {x:300 , y:300}
-]
+  { x: 700, y: 700 },
+  { x: 500, y: 500 },
+  { x: 300, y: 300 },
+];
 
 window.addEventListener("keydown", changeAction);
 
 gameStart();
+
 function gameStart() {
   IdleAnimationStart();
   createEnemy();
+  enemyMove();
 }
 
 /* -----------------------   Actions ------------- ------- */
@@ -352,26 +355,42 @@ function checkWalkOrRun() {
 
 /*-----------------  Enemies ------------------*/
 
-function createEnemy() { 
-
-  for (var i = 1; i <= 10; i++) {  
-
+function createEnemy() {
+  for (var i = 1; i <= 10; i++) {
     enemy = document.createElement("div");
     enemy.className = "enemy";
     document.getElementById("background").appendChild(enemy);
     enemy.style.marginLeft = enemyMarginLeft + "px";
+    enemy.id = "enemy" + i;
 
-
-    if( i < 5){
-    enemyMarginLeft += 500;
-        
-    } else if( i <= 8){
-    enemyMarginLeft += 300;
-
-    }
-    else{
-      enemyMarginLeft += 250;
+    if (i < 5) {
+      enemyMarginLeft += 1500;
+    } else if (i <= 8) {
+      enemyMarginLeft += 1100;
+    } else {
+      enemyMarginLeft += 800;
     }
   }
 }
 
+function enemyMove() {
+  if (moveEnemyIntervalId == 0) {
+    moveEnemyIntervalId = setInterval(moveAnimation, 25);
+  }
+}
+
+function moveAnimation() {
+  for (var i = 1; i <= 10; i++) {
+    var enemy = document.getElementById("enemy" + i);
+    var currentMarginLeft = getComputedStyle(enemy).marginLeft;
+    var newMarginLeft = parseInt(currentMarginLeft) - 14;
+    enemy.style.marginLeft = newMarginLeft + "px";
+  }
+}
+
+function testEnemy() {
+  enemy = document.createElement("div");
+  enemy.className = "enemy";
+  document.getElementById("background").appendChild(enemy);
+  enemy.style.marginLeft = "300px";
+}
