@@ -52,7 +52,7 @@
   font-family: "CARTOON FREE", sans-serif;
   color: brown;
 }
-#gameOverBtn {
+#playAgainBtn {
   padding: 20px;
   font-size: 20px;
   border: none;
@@ -66,4 +66,11 @@
   font-family: "Josefin Sans", sans-serif;
   font-weight: bold ;
   text-align: center;
+}
+#scoreBoard{
+  background-color: aliceblue;
+  font-size: 25px;
+  text-align: center;
+  margin:auto;
+  font-size: bold;
 }

@@ -1,6 +1,6 @@
 var hero = document.getElementById("hero");
-// let enemyId = document.querySelector("#enemy");
-// var enemyOnce = document.getElementById("enemy");
+let playAgainBtn = document.querySelector("#playAgainBtn");
+var gameOver = document.getElementById("gameOver");
 var background = document.getElementById("background");
 let idleImageNumber = 0;
 let runImageNumber = 0;
@@ -23,20 +23,22 @@ let moveBackgroundX;
 let moveWalkBackgroundX;
 let enemyMarginLeft = 1500;
 let boyMarginTop = 500;
-let enemyOne = [
-  { x: 700, y: 700 },
-  { x: 500, y: 500 },
-  { x: 300, y: 300 },
-];
+let gameRunning = true;
+let newMarginLeft = 0;
 
 window.addEventListener("keydown", changeAction);
+playAgainBtn.addEventListener("click", restartGame);
 
-// gameStart();
+gameStart();
 
 function gameStart() {
-  IdleAnimationStart();
-  createEnemy();
-  enemyMove();
+  gameRunning = true;
+
+  if (gameRunning) {
+    IdleAnimationStart();
+    createEnemy();
+    enemyMove();
+  }
 }
 
 /* -----------------------   Actions ------------- ------- */
@@ -386,7 +388,7 @@ function moveAnimation() {
   for (var i = 1; i <= 20; i++) {
     var enemy = document.getElementById("enemy" + i);
     var currentMarginLeft = getComputedStyle(enemy).marginLeft;
-    var newMarginLeft = parseInt(currentMarginLeft) - 14;
+    newMarginLeft = parseInt(currentMarginLeft) - 14;
     enemy.style.marginLeft = newMarginLeft + "px";
 
     if ((newMarginLeft >= 100) & (newMarginLeft <= 200)) {
@@ -421,8 +423,7 @@ function gameOverAnimations() {
   clearInterval(moveBackgroundX);
 
   deadAnimationStart();
-
-  
+  gameRunning = false;
 }
 
 function deadAnimationStart() {
@@ -433,10 +434,36 @@ function deadAnaimation() {
 
   if (deadImageNumber >= 10) {
     clearInterval(deadIntervalId);
+    gameOver.style.display = "block";
   }
 
   hero.src = "images/Dead (" + deadImageNumber + ").png";
 }
 
-
-
+function restartGame() {
+  gameRunning = true;
+  gameOver.style.display = "none";
+  idleImageNumber = 0;
+  runImageNumber = 0;
+  attackImageNumber = 0;
+  jumpImageNumber = 0;
+  jumpAttackImageNumber = 0;
+  walkImageNumber = 0;
+  deadImageNumber = 0;
+  idleIntevalId;
+  runIntevalId;
+  jumpIntevalId;
+  attackIntevalId;
+  jumpAttackIntevalId;
+  walkIntevalId;
+  deadIntervalId;
+  moveEnemyIntervalId = 0;
+  run = false;
+  backgroundImagePosition = 0;
+  moveBackgroundX;
+  moveWalkBackgroundX;
+  enemyMarginLeft = 1500;
+  boyMarginTop = 500;
+  // gameStart();
+  window.location.reload();
+}
