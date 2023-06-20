@@ -8,12 +8,14 @@ let attackImageNumber = 0;
 let jumpImageNumber = 0;
 let jumpAttackImageNumber = 0;
 let walkImageNumber = 0;
+let deadImageNumber = 0;
 let idleIntevalId;
 let runIntevalId;
 let jumpIntevalId;
 let attackIntevalId;
 let jumpAttackIntevalId;
 let walkIntevalId;
+let deadIntervalId;
 let moveEnemyIntervalId = 0;
 let run = false;
 var backgroundImagePosition = 0;
@@ -29,7 +31,9 @@ let enemyOne = [
 
 window.addEventListener("keydown", changeAction);
 
-gameStart();
+// gameStart();
+ deadAnimationStart();
+
 
 function gameStart() {
   IdleAnimationStart();
@@ -421,4 +425,17 @@ function gameOverAnimations(){
   clearInterval(walkIntevalId);
   clearInterval(moveWalkBackgroundX);
   clearInterval(moveBackgroundX);
+}
+
+function deadAnimationStart(){
+   deadIntervalId = setInterval(deadAnaimation,100);
+}
+function deadAnaimation(){
+       deadImageNumber += 1;
+
+       if(deadImageNumber >= 11){
+        deadImageNumber = 1;
+       }
+
+     hero.src = "images/Dead ("+ deadImageNumber +").png";
 }
