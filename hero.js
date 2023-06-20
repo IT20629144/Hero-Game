@@ -521,7 +521,7 @@ function backgroundMusicCheck(){
 
   if(gameRunning){
     backgroundMusic.play();
-
+    backgroundMusic.loop = true;
   }
   else{
     backgroundMusic.pause();
