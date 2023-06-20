@@ -16,21 +16,54 @@
   overflow-x: hidden;
   position: absolute;
 }
-.hero{
-    position: absolute;
-    height:250px;
-    width:200px;
-    /* bottom: 42px;
+.hero {
+  position: absolute;
+  height: 250px;
+  width: 200px;
+  /* bottom: 42px;
     left: 90px; */
-    margin-top: 500px;
-    margin-left:90px;
+  margin-top: 500px;
+  margin-left: 90px;
 }
-.enemy{
-  width:90px;
-  height:100px;
-  position:absolute;
+.enemy {
+  width: 90px;
+  height: 100px;
+  position: absolute;
   margin-top: 645px;
   background-image: url(images/skeleton-animation_00.png);
   background-size: contain;
   background-repeat: no-repeat;
+}
+.gameOver {
+  width: 400px;
+  height: 220px;
+  background-color: aliceblue;
+  border: 5px solid;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 250px;
+  text-align: center;
+  padding: 20px;
+}
+#gameOverLabel {
+  font-size: 52px;
+  margin: auto;
+  margin-top: 25px;
+  font-family: "CARTOON FREE", sans-serif;
+  color: brown;
+}
+#gameOverBtn {
+  padding: 20px;
+  font-size: 20px;
+  border: none;
+  background-color: cornflowerblue;
+  color: aliceblue;
+  margin: auto;
+  margin-top: 15px;
+  border-radius: 2px;
+  width: 220px;
+  height:70px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold ;
+  text-align: center;
 }

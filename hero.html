@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hero Game!</title>
     <link rel="stylesheet" href="hero.css" />
+    <link href="https://fonts.cdnfonts.com/css/cartoon-free" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,500;1,100;1,400&family=Poppins:wght@200;300;400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+                
+                          
   </head>
   <body>
     <div class="background" id="background">
-      <img src="images/Idle (1).png" class="hero" id="hero"/>
+      <img src="images/Idle (1).png" class="hero" id="hero" />
       <!-- <div class="enemy" id="enemy"></div> -->
+      <div class="gameOver" id="gameOver">
+        <div id="gameOverLabel">Game Over!</div><br>
+        <button id="gameOverBtn">PLAY AGAIN</button>
+      </div>
     </div>
-    
   </body>
   <script src="hero.js"></script>
 </html>
