@@ -4,6 +4,8 @@ var gameOver = document.getElementById("gameOver");
 var background = document.getElementById("background");
 let scoreBoard = document.querySelector("#scoreBoard");
 let scoreDisplay = document.querySelector("#scoreDisplay");
+let wonDisplay = document.querySelector("#wonDisplay");
+let GoHomeBtn = document.querySelector("#GoHomeBtn");
 let idleImageNumber = 0;
 let runImageNumber = 0;
 let attackImageNumber = 0;
@@ -32,6 +34,7 @@ let score = 0;
 
 window.addEventListener("keydown", changeAction);
 playAgainBtn.addEventListener("click", restartGame);
+// GoHomeBtn.addEventListener("click", GoToHome);
 
 gameStart();
 
@@ -455,6 +458,7 @@ function HeroScore() {
 function scoreCalculate() {
   score += 10;
   scoreBoard.textContent = `Score : ${score}`;
+  gameWin();
 }
 
 //Restart Game
@@ -484,4 +488,24 @@ function restartGame() {
   boyMarginTop = 500;
   // gameStart();
   window.location.reload();
+}
+
+// Game Win
+
+function gameWin(){
+  if(score >= 3000){
+     wonDisplay.style.display ="block";
+      clearInterval(runIntevalId);
+      clearInterval(walkIntevalId);
+      clearInterval(moveEnemyIntervalId);
+      clearInterval(jumpIntevalId);
+      clearInterval(idleIntevalId);
+      clearInterval(attackIntevalId);
+      clearInterval(jumpAttackIntevalId);
+      clearInterval(walkIntevalId);
+      clearInterval(moveWalkBackgroundX);
+      clearInterval(moveBackgroundX);
+      clearInterval(ScoreIntervalId); 
+    
+  }
 }

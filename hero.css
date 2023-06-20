@@ -35,13 +35,13 @@
   background-repeat: no-repeat;
 }
 .gameOver {
-  width: 400px;
-  height: 220px;
+  width: 500px;
+  height: 260px;
   background-color: aliceblue;
   border: 5px solid;
   border-radius: 20px;
   margin: auto;
-  margin-top: 250px;
+  margin-top: 200px;
   text-align: center;
   padding: 20px;
 }
@@ -59,7 +59,7 @@
   background-color: cornflowerblue;
   color: aliceblue;
   margin: auto;
-  margin-top: 15px;
+  margin-top: 25px;
   border-radius: 2px;
   width: 220px;
   height:70px;
@@ -81,4 +81,37 @@
   margin:auto;
   font-size: bold;
   font-family: "Permanent Marker",cursive;
+}
+#wonDisplay {
+  width: 500px;
+  height: 260px;
+  background-color: aliceblue;
+  border: 5px solid;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 200px;
+  text-align: center;
+  padding: 20px;
+}
+#GameWinLabel {
+  font-size: 72px;
+  margin: auto;
+  margin-top: 25px;
+  font-family: "CARTOON FREE", sans-serif;
+  color: brown;
+}
+#GoHomeBtn {
+  padding: 20px;
+  font-size: 20px;
+  border: none;
+  background-color: cornflowerblue;
+  color: aliceblue;
+  margin: auto;
+  margin-top: 35px;
+  border-radius: 2px;
+  width: 220px;
+  height:70px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold ;
+  text-align: center;
 }
