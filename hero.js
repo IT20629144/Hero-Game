@@ -32,8 +32,6 @@ let enemyOne = [
 window.addEventListener("keydown", changeAction);
 
 // gameStart();
- deadAnimationStart();
-
 
 function gameStart() {
   IdleAnimationStart();
@@ -385,21 +383,20 @@ function enemyMove() {
 }
 
 function moveAnimation() {
-  for (var i = 1; i <= 10; i++) {
+  for (var i = 1; i <= 20; i++) {
     var enemy = document.getElementById("enemy" + i);
     var currentMarginLeft = getComputedStyle(enemy).marginLeft;
     var newMarginLeft = parseInt(currentMarginLeft) - 14;
     enemy.style.marginLeft = newMarginLeft + "px";
 
-    if(newMarginLeft >= 100 & newMarginLeft <= 200){
-      if(jumpPositionY > 450){
+    if ((newMarginLeft >= 100) & (newMarginLeft <= 200)) {
+      if (jumpPositionY > 450) {
         gameOverAnimations();
       }
     }
   }
 
   console.log(jumpPositionY);
-
 }
 
 function testEnemy() {
@@ -409,12 +406,9 @@ function testEnemy() {
   enemy.style.marginLeft = "300px";
 }
 
-
 /* ----------------------------   Hero Dead -------------------------*/
 
-
-function gameOverAnimations(){
-
+function gameOverAnimations() {
   clearInterval(runIntevalId);
   clearInterval(walkIntevalId);
   clearInterval(moveEnemyIntervalId);
@@ -425,17 +419,24 @@ function gameOverAnimations(){
   clearInterval(walkIntevalId);
   clearInterval(moveWalkBackgroundX);
   clearInterval(moveBackgroundX);
+
+  deadAnimationStart();
+
+  
 }
 
-function deadAnimationStart(){
-   deadIntervalId = setInterval(deadAnaimation,100);
+function deadAnimationStart() {
+  deadIntervalId = setInterval(deadAnaimation, 100);
 }
-function deadAnaimation(){
-       deadImageNumber += 1;
+function deadAnaimation() {
+  deadImageNumber += 1;
 
-       if(deadImageNumber >= 11){
-        deadImageNumber = 1;
-       }
+  if (deadImageNumber >= 10) {
+    clearInterval(deadIntervalId);
+  }
 
-     hero.src = "images/Dead ("+ deadImageNumber +").png";
+  hero.src = "images/Dead (" + deadImageNumber + ").png";
 }
+
+
+
