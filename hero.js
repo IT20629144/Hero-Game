@@ -2,6 +2,8 @@ var hero = document.getElementById("hero");
 let playAgainBtn = document.querySelector("#playAgainBtn");
 var gameOver = document.getElementById("gameOver");
 var background = document.getElementById("background");
+let scoreBoard = document.querySelector("#scoreBoard");
+let scoreDisplay = document.querySelector("#scoreDisplay");
 let idleImageNumber = 0;
 let runImageNumber = 0;
 let attackImageNumber = 0;
@@ -16,6 +18,7 @@ let attackIntevalId;
 let jumpAttackIntevalId;
 let walkIntevalId;
 let deadIntervalId;
+let ScoreIntervalId;
 let moveEnemyIntervalId = 0;
 let run = false;
 var backgroundImagePosition = 0;
@@ -25,6 +28,7 @@ let enemyMarginLeft = 1500;
 let boyMarginTop = 500;
 let gameRunning = true;
 let newMarginLeft = 0;
+let score = 0;
 
 window.addEventListener("keydown", changeAction);
 playAgainBtn.addEventListener("click", restartGame);
@@ -38,6 +42,7 @@ function gameStart() {
     IdleAnimationStart();
     createEnemy();
     enemyMove();
+    HeroScore();
   }
 }
 
@@ -398,7 +403,7 @@ function moveAnimation() {
     }
   }
 
-  console.log(jumpPositionY);
+  // console.log(jumpPositionY);
 }
 
 function testEnemy() {
@@ -421,6 +426,7 @@ function gameOverAnimations() {
   clearInterval(walkIntevalId);
   clearInterval(moveWalkBackgroundX);
   clearInterval(moveBackgroundX);
+  clearInterval(ScoreIntervalId); 
 
   deadAnimationStart();
   gameRunning = false;
@@ -435,11 +441,23 @@ function deadAnaimation() {
   if (deadImageNumber >= 10) {
     clearInterval(deadIntervalId);
     gameOver.style.display = "block";
+    scoreDisplay.textContent = `Your Score is : ${score}`;
   }
 
   hero.src = "images/Dead (" + deadImageNumber + ").png";
 }
 
+// Hero Score
+function HeroScore() {
+  ScoreIntervalId = setInterval(scoreCalculate, 100);
+}
+
+function scoreCalculate() {
+  score += 10;
+  scoreBoard.textContent = `Score : ${score}`;
+}
+
+//Restart Game
 function restartGame() {
   gameRunning = true;
   gameOver.style.display = "none";
