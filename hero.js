@@ -20,6 +20,7 @@ var backgroundImagePosition = 0;
 let moveBackgroundX;
 let moveWalkBackgroundX;
 let enemyMarginLeft = 1500;
+let boyMarginTop = 500;
 let enemyOne = [
   { x: 700, y: 700 },
   { x: 500, y: 500 },
@@ -356,7 +357,7 @@ function checkWalkOrRun() {
 /*-----------------  Enemies ------------------*/
 
 function createEnemy() {
-  for (var i = 1; i <= 10; i++) {
+  for (var i = 1; i <= 20; i++) {
     enemy = document.createElement("div");
     enemy.className = "enemy";
     document.getElementById("background").appendChild(enemy);
@@ -385,7 +386,16 @@ function moveAnimation() {
     var currentMarginLeft = getComputedStyle(enemy).marginLeft;
     var newMarginLeft = parseInt(currentMarginLeft) - 14;
     enemy.style.marginLeft = newMarginLeft + "px";
+
+    if(newMarginLeft >= 100 & newMarginLeft <= 200){
+      if(jumpPositionY > 450){
+        gameOverAnimations();
+      }
+    }
   }
+
+  console.log(jumpPositionY);
+
 }
 
 function testEnemy() {
@@ -393,4 +403,22 @@ function testEnemy() {
   enemy.className = "enemy";
   document.getElementById("background").appendChild(enemy);
   enemy.style.marginLeft = "300px";
+}
+
+
+/* ----------------------------   Hero Dead -------------------------*/
+
+
+function gameOverAnimations(){
+
+  clearInterval(runIntevalId);
+  clearInterval(walkIntevalId);
+  clearInterval(moveEnemyIntervalId);
+  clearInterval(jumpIntevalId);
+  clearInterval(idleIntevalId);
+  clearInterval(attackIntevalId);
+  clearInterval(jumpAttackIntevalId);
+  clearInterval(walkIntevalId);
+  clearInterval(moveWalkBackgroundX);
+  clearInterval(moveBackgroundX);
 }
