@@ -89,6 +89,7 @@ function jumpAnimation() {
 
       clearInterval(jumpIntevalId);
       checkWalkOrRun();
+      jumpSound();
     }
   }
 
@@ -431,13 +432,12 @@ function gameOverAnimations() {
   clearInterval(walkIntevalId);
   clearInterval(moveWalkBackgroundX);
   clearInterval(moveBackgroundX);
-  clearInterval(ScoreIntervalId); 
+  clearInterval(ScoreIntervalId);
 
   gameRunning = false;
   backgroundMusicCheck();
   DeadSound();
   deadAnimationStart();
-  
 }
 
 function deadAnimationStart() {
@@ -497,39 +497,48 @@ function restartGame() {
 
 // Game Win
 
-function gameWin(){
-  if(score >= 3000){
-     wonDisplay.style.display ="block";
-      clearInterval(runIntevalId);
-      clearInterval(walkIntevalId);
-      clearInterval(moveEnemyIntervalId);
-      clearInterval(jumpIntevalId);
-      clearInterval(idleIntevalId);
-      clearInterval(attackIntevalId);
-      clearInterval(jumpAttackIntevalId);
-      clearInterval(walkIntevalId);
-      clearInterval(moveWalkBackgroundX);
-      clearInterval(moveBackgroundX);
-      clearInterval(ScoreIntervalId); 
-    
+function gameWin() {
+  if (score >= 3000) {
+    wonDisplay.style.display = "block";
+    clearInterval(runIntevalId);
+    clearInterval(walkIntevalId);
+    clearInterval(moveEnemyIntervalId);
+    clearInterval(jumpIntevalId);
+    clearInterval(idleIntevalId);
+    clearInterval(attackIntevalId);
+    clearInterval(jumpAttackIntevalId);
+    clearInterval(walkIntevalId);
+    clearInterval(moveWalkBackgroundX);
+    clearInterval(moveBackgroundX);
+    clearInterval(ScoreIntervalId);
+    gameRunning = false;
+    backgroundMusicCheck();
+    gameWinSound();
   }
 }
 
 // Music & sounds
 
-function backgroundMusicCheck(){
-
-  if(gameRunning){
+function backgroundMusicCheck() {
+  if (gameRunning) {
     backgroundMusic.play();
     backgroundMusic.loop = true;
-  }
-  else{
+  } else {
     backgroundMusic.pause();
   }
-};
+}
 
-function DeadSound(){
+function DeadSound() {
   let gameOverMusic = new Audio("music/gameOver.mp3");
   gameOverMusic.play();
-};
+}
 
+function gameWinSound() {
+  let gameWinMusic = new Audio("music/win_sound.wav");
+  gameWinMusic.play();
+}
+
+function jumpSound() {
+  let gameJumpMusic = new Audio("music/jump.wav");
+  gameJumpMusic.play();
+}
