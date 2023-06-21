@@ -73,6 +73,12 @@
   text-align: center;
   margin:auto;
   font-size: bold;
+  position: absolute;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+  height:40px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #scoreDisplay{
   background-color: aliceblue;
